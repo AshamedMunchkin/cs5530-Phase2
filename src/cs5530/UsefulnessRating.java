@@ -1,6 +1,6 @@
 package cs5530;
 
-public class UsefulnessRating {
+class UsefulnessRating {
     private final String reviewer;
     private final String isbn;
     private final String rater;

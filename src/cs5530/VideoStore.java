@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Date;
 
-public class VideoStore {
+class VideoStore {
 	private final Connection connection;
 	private String username = "";
     private boolean isManager;
@@ -331,25 +331,11 @@ public class VideoStore {
     private static LinkedList<Video> videoListFromResultSet(ResultSet resultSet) throws SQLException {
         LinkedList<Video> videos = new LinkedList<Video>();
         while (resultSet.next()) {
-            List<String> directors = new LinkedList<String>();
-            if (resultSet.getString(8) != null) {
-                directors = Arrays.asList(resultSet.getString(8).split(","));
-            }
-            List<String> performers = new LinkedList<String>();
-            if (resultSet.getString(9) != null) {
-                performers = Arrays.asList(resultSet.getString(9).split(","));
-            }
-            List<String> subject = new LinkedList<String>();
-            if (resultSet.getString(10) != null) {
-                subject = Arrays.asList(resultSet.getString(10).split(","));
-            }
-            List<String> keywords = new LinkedList<String>();
-            if (resultSet.getString(11) != null) {
-                keywords = Arrays.asList(resultSet.getString(11).split(","));
-            }
             videos.add(new Video(resultSet.getString(1), resultSet.getString(2), resultSet.getDate(3),
                     resultSet.getString(4), resultSet.getString(5), resultSet.getDouble(6), resultSet.getInt(7),
-                    directors, performers, subject, keywords));
+                    Arrays.asList(resultSet.getString(8).split(",")), Arrays.asList(resultSet.getString(9).split(",")),
+                    Arrays.asList(resultSet.getString(10).split(",")),
+                    Arrays.asList(resultSet.getString(11).split(","))));
         }
         return videos;
     }
@@ -617,25 +603,11 @@ public class VideoStore {
                 orderDirection, 0);
 
         resultSet.next();
-        List<String> directors = new LinkedList<String>();
-        if (resultSet.getString(8) != null) {
-            directors = Arrays.asList(resultSet.getString(8).split(","));
-        }
-        List<String> performers = new LinkedList<String>();
-        if (resultSet.getString(9) != null) {
-            performers = Arrays.asList(resultSet.getString(9).split(","));
-        }
-        List<String> subject = new LinkedList<String>();
-        if (resultSet.getString(10) != null) {
-            subject = Arrays.asList(resultSet.getString(10).split(","));
-        }
-        List<String> keywords = new LinkedList<String>();
-        if (resultSet.getString(11) != null) {
-            keywords = Arrays.asList(resultSet.getString(11).split(","));
-        }
+
         return new Video(resultSet.getString(1), resultSet.getString(2), resultSet.getDate(3), resultSet.getString(4),
-                resultSet.getString(5), resultSet.getDouble(6), resultSet.getInt(7), directors, performers, subject,
-                keywords);
+                resultSet.getString(5), resultSet.getDouble(6), resultSet.getInt(7),
+                Arrays.asList(resultSet.getString(8).split(",")), Arrays.asList(resultSet.getString(9).split(",")),
+                Arrays.asList(resultSet.getString(10).split(",")), Arrays.asList(resultSet.getString(11).split(",")));
     }
 
     public LinkedList<User> getUsers(String username) throws SQLException {

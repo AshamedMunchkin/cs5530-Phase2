@@ -2,7 +2,7 @@ package cs5530;
 
 import java.util.Date;
 
-public class Trusts {
+class Trusts {
     private final String truster;
     private final String trustee;
     private final Boolean isTrusted;

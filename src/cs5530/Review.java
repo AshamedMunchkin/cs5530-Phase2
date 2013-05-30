@@ -2,7 +2,7 @@ package cs5530;
 
 import java.util.Date;
 
-public class Review {
+class Review {
     private final String reviewer;
     private final String isbn;
     private final int score;
